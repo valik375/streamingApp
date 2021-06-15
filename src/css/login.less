@@ -1,0 +1,87 @@
+// main: style.less
+@import "vars";
+
+.auth-container{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 40px;
+}
+.auth-container__form{
+    background-color: @blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-form {
+    width: 70%;
+    padding: 30px;
+    background-color: @white;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.login-form form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.input-group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.input-group label{
+    font-size: 16px;
+    color: @black;
+    margin-bottom: 4px;
+    text-align: initial;
+}
+.input-group input, .input-group textarea{
+    font-size: 16px;
+    color: @black;
+    border: 2px solid @black;
+    padding: 10px;
+    resize: none;
+    outline: none;
+}
+.input-group input[type="date"]{
+    padding: 7.5px;
+}
+.auth-btn{
+    font-size: 16px;
+    color: @black;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 20px;
+    display: inline-block;
+    opacity: 0.5;
+    transition: all .3s ease;
+    border-bottom: 2px solid @white;
+}
+.auth-btn:hover{
+    opacity: 1;
+    border-bottom: 2px solid @black;
+}
+.auth-container__image {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.auth-container__image img{
+    width: 70%;
+    object-fit: contain;
+    height: 100%;
+}
+.input-group small, .spicker-group small {
+    color: rgb(175, 28, 28);
+    font-size: 14px;
+    font-weight: 400;
+    text-align: initial;
+    margin: 4px 0px;
+}
