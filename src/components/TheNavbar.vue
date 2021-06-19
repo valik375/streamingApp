@@ -17,6 +17,10 @@
       <li class="nav-items">
         <router-link @click="menuToggle" to="/docs" class="logo">Документация</router-link>
       </li>
+
+      <li class="nav-items">
+        <a @click="exit" class="logo">Выход</a>
+      </li>
     </ul>
   </nav>
 </template>
@@ -29,6 +33,10 @@ export default {
   methods: {
     menuToggle() {
       this.menu = !this.menu
+    },
+    async exit() {
+      await this.$store.dispatch('logout')
+      this.$router.push('/login')
     }
   }
 };

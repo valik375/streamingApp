@@ -36,7 +36,7 @@ export default {
       }
       return array
     },
-    async cteareStream({ dispatch }, { sName, usersLink, sDate, sKey, sId, sKeySpicker, sKeyLanguage, sChat, sMainSponcores, sAllSponcores, spickers, spickersImages, advertisement, advertisementImages, showMessage, messageTitle, messageDescription }) {
+    async cteareStream({ dispatch }, { sColor, sName, usersLink, sDate, sKey, sId, sKeySpicker, sKeyLanguage, sChat, sMainSponcores, sAllSponcores, spickers, spickersImages, advertisement, advertisementImages, showMessage, messageTitle, messageDescription }) {
       try {
         const uid = await dispatch('userId')
         
@@ -48,6 +48,7 @@ export default {
         await firebase.database().ref(`users/${uid}/stream/${sId}/`).set({
           sName,
           sKey,
+          sColor,
           sId,
           usersLink,
           sDate,

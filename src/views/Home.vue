@@ -107,7 +107,14 @@
         </div>
 
         <div class="checkbox-container">
-          <h3>Опций</h3>
+          <h3>Опции</h3>
+          <div class="input-group color" :style="`border-color:${sColor}`">
+            <input type="color" id="sColor" v-model="sColor" />
+            <div class="color-info">
+              <label for="sColor">Задать цвет для трансляции</label>
+              <span>Цвет: {{sColor}}</span>
+            </div>
+          </div>
           <div class="options-container">
             <div class="input-group checkbox">
               <input type="checkbox" id="sChat" v-model="sChat" />
@@ -281,6 +288,7 @@ export default {
     dropdown: false,
     uId: '',
     // stream
+    sColor: '#61A2BA',
     sName: '',
     usersLink: '',
     sKey: '',
@@ -368,6 +376,7 @@ export default {
 
       if(this.sName && this.sKey && this.sDate){
         const streamParams = {
+          sColor: this.sColor,
           sName: this.sName,
           sKey: this.sKey,
           sKeyLanguage: this.sKeyLanguage,

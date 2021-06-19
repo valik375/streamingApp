@@ -100,7 +100,16 @@
         </div>
 
         <div class="checkbox-container">
-          <h3>Options</h3>
+          <h3>Опции</h3>
+
+          <div class="input-group color" :style="`border-color:${sColor}`">
+            <input type="color" id="sColor" v-model="sColor" />
+            <div class="color-info">
+              <label for="sColor">Задать цвет для трансляции</label>
+              <span>Цвет: {{sColor}}</span>
+            </div>
+          </div>
+
           <div class="options-container">
             <div class="input-group checkbox">
               <input type="checkbox" id="sChat" v-model="sChat" />
@@ -279,6 +288,7 @@ export default {
     // Stream params
     sName: '',
     sKey: '',
+    sColor: '',
     sKeySpicker: '',
     usersLink: '',
     sChat: '',
@@ -323,6 +333,7 @@ export default {
     this.uId = await this.$store.dispatch("userId")
     await this.$store.dispatch('getStreamParams', {id: +this.$route.params.id, uId: this.uId})
 
+    this.sColor = this.info.sColor
     this.sName = this.info.sName
     this.sKey = this.info.sKey
     this.sKeySpicker = this.info.sKeySpicker
@@ -384,6 +395,7 @@ export default {
       if(this.sName && this.sKey && this.sDate){
         const streamParams = {
           sName: this.sName,
+          sColor: this.sColor,
           sKey: this.sKey,
           sDate: this.sDate,
           sId: this.sId,

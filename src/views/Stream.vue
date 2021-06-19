@@ -11,8 +11,8 @@
 </div>
 
 <div class="stream-wrapper" :class="params.showMessage ? 'hidden' : ''" v-if="params">
-  <div class="stream-header">
-    <h1>{{params.sName}}</h1>
+  <div class="stream-header" :style="params.sColor ? `border-color:${params.sColor}` : ''">
+    <h1 :style="params.sColor ? `color:${params.sColor}` : ''">{{params.sName}}</h1>
     <div class="main-sponcores__image">
       <img 
         v-for="main in sMainSponcores" 
@@ -42,24 +42,26 @@
         ></iframe>
       </div>    
 
-      <div 
-        v-if="params.spickers"
-        class="stream-spickers" 
-        :class="params.spickers && params.spickers.length < 0 ? '' : 'scroll'"
-      >
-        <Spicker 
-          v-for="(spicker, idx) in params.spickers" 
-          :key="spicker.id" 
-          :name="spicker.name"  
-          :position="spicker.position"  
-          :title="spicker.title"  
-          :link="spicker.link"  
-          :time="spicker.time"
-          :image="spickersImages[idx]"
-        />
+      <div class="spicker-wrapper" v-if="params.spickers">
+        <div 
+          class="stream-spickers" 
+          :class="params.spickers && params.spickers.length <= 0 ? '' : 'scroll'"
+        >
+          <Spicker 
+            v-for="(spicker, idx) in params.spickers" 
+            :key="spicker.id" 
+            :name="spicker.name"  
+            :position="spicker.position"  
+            :title="spicker.title"  
+            :link="spicker.link"  
+            :time="spicker.time"
+            :image="spickersImages ? spickersImages[idx] : anonimImage"
+            :color="params.sColor"
+            :style="params.sColor ? `border-color:${params.sColor}` : ''"
+          />
 
+        </div>
       </div>
-
     </div>
 
     <div class="screen-container">
@@ -76,17 +78,17 @@
       </div>
 
       <div class="screen">
-        <div :class="!params.sKeySpicker && !params.sKeyLanguage && !params.spickers ? 'show-chat' : ''">
+        <div :class="!params.sKeySpicker && params.sKeyLanguage && params.spickers ? 'show-chat' : ''">
           <iframe type="text/html" class="strean" allow="autoplay" :src="`https://www.youtube.com/embed/${params.sKey}?autoplay=1&amp;rel=0;`" allowfullscreen="" frameborder="0"></iframe>
           <div v-if="params && !params.sKeySpicker && !params.sKeyLanguage && !params.spickers && params.sChat">
-            <iframe :src="`https://m.youtube.com/live_chat?v=${params.sKey}&amp;is_popout=1&amp;embed_domain=localhost:8080&amp;app=desktop`" frameborder="0"></iframe>
+            <iframe :src="`https://m.youtube.com/live_chat?v=${params.sKey}&amp;is_popout=1&amp;embed_domain=${pageDomain}&amp;app=desktop`" frameborder="0"></iframe>
           </div>
         </div>
       </div>
 
       <div class="change-language" v-if="params.sKeyLanguage">
-        <button class="btn ligth-blue" @click="changeLanguage(params.sKeySpicker)">Ru</button>
-        <button class="btn ligth-blue" @click="changeLanguage(params.sKeyLanguage)">En</button>
+        <button class="btn black" @click="changeLanguage(params.sKeySpicker)" >Ru</button>
+        <button class="btn black" @click="changeLanguage(params.sKeyLanguage)">En</button>
       </div>
       
       <div class="stream-btn__container" v-if="params.advImages || params.usersLink">
@@ -105,13 +107,13 @@
 
       </div>
       <div class="chat" :class="!params.sKeySpicker && !params.sKeyLanguage && !params.spickers ? 'hidden' : ''" v-if="params.sChat">
-        <iframe :src="`https://m.youtube.com/live_chat?v=${params.sKey}&amp;is_popout=1&amp;embed_domain=localhost:8080&amp;app=desktop`" frameborder="0"></iframe>
+        <iframe :src="`https://m.youtube.com/live_chat?v=${params.sKey}&amp;is_popout=1&amp;embed_domain=${pageDomain}amp;app=desktop`" frameborder="0"></iframe>
       </div>
     </div>
 
   </div>
 
-  <div class="footer" v-if="sAllSponcores.length">
+  <div class="footer" :style="params.sColor ? `background:${params.sColor}` : ''" v-if="sAllSponcores.length">
 
     <div class="footer-images">
       <img :src="image.url" :alt="image.name" v-for="image in sAllSponcores" :key="image.url">
@@ -127,9 +129,12 @@
 <script>
 import Spicker from '../components/Spicker'
 import Loader from '../components/Loader'
+import anonymous from '../assets/anonymous.png'
 
 export default {
   data: () => ({
+    pageDomain: window.location.host,
+    anonimImage: anonymous,
     loading: true,
     language: '',
     sMainSponcores: [],

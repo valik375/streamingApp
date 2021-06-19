@@ -5,7 +5,7 @@
         <form @submit.prevent="onSubmithForm">
 
           <div class="input-group">
-            <label for="name">Name</label>
+            <label for="name">Имя</label>
             <input type="name" id="name" v-model="name" />
             <small v-if="errors.eName.length != 0">{{ errors.eName }}</small>
           </div>
@@ -17,22 +17,22 @@
           </div>
 
           <div class="input-group">
-            <label for="password">Password</label>
+            <label for="password">Пароль</label>
             <input type="password" id="password" v-model="password" />
             <small v-if="errors.ePassword.length != 0">{{ errors.ePassword }}</small>
           </div>
 
           <div class="input-group">
-            <label for="repeatPassword">Repeat password </label>
+            <label for="repeatPassword">Повторите пароль</label>
             <input type="password" id="repeatPassword" v-model="repeatPassword" />
             <small v-if="errors.eRepeatPassword.length != 0">{{ errors.eRepeatPassword }}</small>
           </div>
 
-          <button class="btn auth" type="submit">Registration</button>
+          <button class="btn auth" type="submit">Зарегистрироваться</button>
         </form>
 
         <router-link class="auth-btn" to="/login"
-          >Login</router-link
+          >Войти</router-link
         >
       </div>
     </div>
